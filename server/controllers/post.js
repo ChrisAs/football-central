@@ -76,10 +76,51 @@ function getAllPosts (req, res) {
         });
 }
 
+function createComment (req, res) {
+    console.log("BODY HERE: ", req.body)
+    Post.find({ _id: req.body.id })
+        .then((posts, err) => {
+            if(posts) {
+                console.log("Post with id: ", posts);
+                if(posts.length) {
+                    let comments = posts[0].comments;
+                    comments.push(req.body.comment);
+
+                    Post.update({ _id: req.body.id }, {
+                        comments
+                    }).then(()=>{
+                        res.send({
+                            type: "success",
+                            message: "Comment added successfully!"
+                        })
+                    }).catch(errComment=>{
+                        res.send({
+                            type: "error",
+                            message: errComment
+                        })
+                    })
+                }
+            } else {
+                res.send({
+                    type: "error",
+                    message: "No post found!"
+                })
+            }
+
+            if(err) {
+                res.send({
+                    type: "error",
+                    message: err
+                })
+            }
+        })
+}
+
 
 
 module.exports = {
     createPost,
     getAllPosts,
     deletePost,
+    createComment
 };

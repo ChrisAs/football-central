@@ -7,6 +7,8 @@ export const GET_ALL_POST_SUCCESS = "GET_ALL_POST_SUCCESS";
 export const GET_ALL_POST_FAIL = "GET_ALL_POST_FAIL";
 export const DELETE_POST_FAIL = "DELETE_POST"
 export const DELETE_POST_SUCCESS ="DELETE_POST_SUCCESS"
+export const CREATE_COMMENT_SUCCESS = "CREATE_COMMENT_SUCCESS";
+export const CREATE_COMMENT_FAIL = "CREATE_COMMENT_FAIL";
 // dispatch from redux thunk
 // data is object {topic, body}
 export function createPost(data, cb) {
@@ -74,5 +76,33 @@ export function deletePost(postId) {
       .catch(function (error) {
         console.log(error);
       });
+  };
+}
+
+export function addPostComment(data, cb) {
+  return (dispatch) => {
+    axios.post(ENDPOINT + "/createComment", data).then((response) => {
+      console.log("Comment Created. ", response);
+      if (response.data.type === "success") {
+        dispatch({
+          type: CREATE_COMMENT_SUCCESS,
+          payload: {
+            id: data.id,
+            comment: data.comment
+          },
+        });
+        alert(response.data.message);
+
+        // CLOSES INPUT SECTION
+        cb();
+      } else {
+        if (response.data.type === "error") {
+          dispatch({
+            type: CREATE_COMMENT_FAIL,
+          });
+          alert(response.data.message);
+        }
+      }
+    });
   };
 }

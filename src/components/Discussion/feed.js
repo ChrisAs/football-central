@@ -58,7 +58,7 @@ function FeedCards(props) {
   }
 
   return (
-     <Link to={`/Discussion/${props.feed._id}`}>
+     <Link to={{ pathname: `/Discussion/${props.feed._id}`, state: props.feed}}>
        
     <Card className={classes.root}>
       <CardHeader

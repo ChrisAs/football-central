@@ -7,11 +7,11 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-
+import AddIcon from '@material-ui/icons/Add';
 
 import Feed from "./feed";
 import MainPost from './mainpost';
-import AddFeed from './addFeed';
+
 import { withRouter } from "react-router-dom";
 import { getAllPosts } from "../../redux/actions/postActions";
 import { connect } from "react-redux";
@@ -59,9 +59,7 @@ function SimpleContainer(props) {
 <h1 style={{paddingTop: "120px", position: "sticky",textAlign: "center"}}>Discussion Boards📯</h1>
       <Container maxWidth="lg">
         <div style={{ height: "5vh" }} />
-        <MainPost />
-        <Button style={buttonStyles} onClick={toggleAddFeed} >Comment!</Button>
-        {showAddFeed ?  <AddFeed onSubmit={toggleAddFeed}/> : null}
+       
         {posts.length ? (
           posts.map((item) => <Feed feed={item} />)
         ) : (
@@ -76,6 +74,15 @@ function SimpleContainer(props) {
           onClick={scrollTop}
         >
           <ArrowUpwardIcon style={{ color:"white"}}/>
+        </Fab>
+
+        <Fab
+          color="primary"
+          style={{backgroundColor:"blue", position: "fixed", top: "7vh", right: "22vw" }}
+          aria-label="add"
+          onClick={()=>props.history.push("/NewPost")}
+        >
+          <AddIcon style={{ color:"white"}}/>
         </Fab>
       </Container>
     </div>

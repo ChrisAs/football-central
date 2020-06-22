@@ -11,7 +11,8 @@ import Fixture from '../Fixture/Fixture';
 import League from '../League/League';
 import Team from '../Team/Team';
 import Discussion from "../Discussion/home"
-// import Newpost from "../Discussion/addFeed"
+import Newpost from "../Discussion/addFeed"
+import DiscussionDetails  from "../Discussion/feedComments";
 
 function App() {
 
@@ -29,9 +30,9 @@ function App() {
           <Route path='/league/:leagueID/:leagueName' component={League} /> 
           <Route path='/fixture/:fixtureID' component={Fixture} />
           <Route path='/team/:teamID/:leagueID/:teamName/:leagueName' component={Team} />
-          <Route path='/Discussion'component={Discussion}/>
-          <Route path='/Discussion/:id'component={Discussion}/>
-          {/* <Route path='/league/NewPost'component={Newpost}/> */}
+          <Route exact path='/Discussion'component={Discussion}/>
+          <Route path='/Discussion/:id'component={DiscussionDetails}/>
+          <Route path='/NewPost' component={Newpost}/>
         </Switch>
       
       </div>
