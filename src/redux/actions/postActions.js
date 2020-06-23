@@ -60,6 +60,7 @@ export function getAllPosts(data) {
 
 export function deletePost(postId) {
   return (dispatch) => {
+    
     axios
       .delete(ENDPOINT + "/deletePost/" + postId)
       .then(function (response) {

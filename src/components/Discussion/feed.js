@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-
+import { deletePost } from "../../redux/actions/postActions";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
@@ -50,11 +50,11 @@ function FeedCards(props) {
   const [expanded, setExpanded] = React.useState(false);
   console.log("Feed Item: ", props.feed)
 
-  function handleDelete (){
+  function handleDelete (props){
     alert("Post deleted!")
     const id = props.feed;
 
-    props.deletePost(id);
+    console.log(deletePost(id));
   }
 
   return (
